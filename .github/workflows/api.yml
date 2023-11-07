@@ -13,6 +13,7 @@ jobs:
           url: https://api.github.com/repos/bromba-noesis/envs-public/environments/Development
           method: "GET"
           accept: 200
+          headers: '{ "Accept": "application/vnd.github+json" }'
           #bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
           log-response: true
 

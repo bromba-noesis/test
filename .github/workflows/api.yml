@@ -19,4 +19,5 @@ jobs:
           #log-response: true
 
       - name: response
-        run: echo ${{ steps.api.outputs.response }}
+        run: echo '${{ fromJson(steps.api.outputs.response).status_code }}'
+      

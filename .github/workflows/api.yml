@@ -19,5 +19,7 @@ jobs:
           #log-response: true
 
       - name: response
-        run: echo '${{ fromJson(steps.api.outputs.response).status_code }}'
+        run: echo ${{ steps.api.outputs.response }}
       
+      - name: parsed_response
+        run: echo '${{ fromJson(steps.api.outputs.response).status_code }}'

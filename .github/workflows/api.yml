@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: api
         uses: indiesdev/curl@v1.1
+        id: api
         with:
           url: https://api.github.com/repos/bromba-noesis/envs-public/environments/Development
           method: "GET"

@@ -19,4 +19,4 @@ jobs:
           log-response: true
 
       - name: response
-        run: echo ${{ steps.api.outputs.response.status }}
+        run: echo ${{ steps.api.outputs.response }}

@@ -16,7 +16,7 @@ jobs:
           accept: 200
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           #bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
-          log-response: true
+          #log-response: true
 
       - name: response
         run: echo ${{ steps.api.outputs.response }}

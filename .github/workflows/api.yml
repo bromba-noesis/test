@@ -74,7 +74,7 @@ jobs:
         uses: indiesdev/curl@v1.1
         id: branches_release
         with:
-          url: https://api.github.com/repos/bromba-noesis/envs-public/branches/release&#47v1.0.0/protection
+          url: https://api.github.com/repos/bromba-noesis/envs-public/branches/release&#47;v1.0.0/protection
           method: "GET"
           accept: 200, 404
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'

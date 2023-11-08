@@ -11,12 +11,12 @@ jobs:
         uses: indiesdev/curl@v1.1
         id: api
         with:
-          url: https://api.github.com/repos/bromba-noesis/envs-public/environments/Development
+          url: https://api.github.com/repos/bromba-noesis/envs-public/environments/QA
           method: "PUT"
           accept: 200, 422
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
-          body: '{ "reviewers":[{"type":"User","id":126766083}] }'      # find user id here: https://caius.github.io/github_id/
+          body: '{ "reviewers":[{"type":"User","id":126766083}], "deployment_branch_policy":{"protected_branches":false,"custom_branch_policies":true} }'    # find user id here: https://caius.github.io/github_id/
           
       - name: response
         run: |

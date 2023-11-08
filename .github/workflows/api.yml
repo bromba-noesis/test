@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  env_setup:
+  repo_setup:
     runs-on: ubuntu-latest
     steps:
-      - name: api
+      - name: env
         uses: indiesdev/curl@v1.1
-        id: api
+        id: env
         with:
           url: https://api.github.com/repos/bromba-noesis/envs-public/environments/QA
           method: "PUT"
@@ -18,12 +18,12 @@ jobs:
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
           body: '{ "reviewers":[{"type":"User","id":126766083}], "deployment_branch_policy":{"protected_branches":false,"custom_branch_policies":true} }'    # find user id here: https://caius.github.io/github_id/
           
-      - name: response
+      - name: env_response
         run: |
           set +x
-          echo ${{ steps.api.outputs.response }} 
+          echo ${{ steps.env.outputs.response }} 
       
-      - name: parsed_response
+      - name: env_parsed_response
         run: |
           set +x
-          echo '${{ fromJson(steps.api.outputs.response).status_code }}'
+          echo '${{ fromJson(steps.env.outputs.response).status_code }}'

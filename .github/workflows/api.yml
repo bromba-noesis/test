@@ -49,3 +49,44 @@ jobs:
         run: |
           set +x
           echo '${{ fromJson(steps.env_branches.outputs.response).status_code }}'
+
+      - name: branches_dev
+        uses: indiesdev/curl@v1.1
+        id: branches_dev
+        with:
+          url: https://api.github.com/repos/bromba-noesis/envs-public/branches/development/protection
+          method: "POST"
+          accept: 200, 404
+          headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
+          bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}   
+          
+      - name: branches_dev_response
+        run: |
+          set +x
+          echo ${{ steps.branches_dev.outputs.response }} 
+      
+      - name: branches_dev_parsed_response
+        run: |
+          set +x
+          echo '${{ fromJson(steps.branches_dev.outputs.response).status_code }}'
+
+      - name: branches_release
+        uses: indiesdev/curl@v1.1
+        id: branches_release
+        with:
+          url: https://api.github.com/repos/bromba-noesis/envs-public/branches/releasesss/**/protection
+          method: "POST"
+          accept: 200, 404
+          headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
+          bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}   
+          
+      - name: branches_release_response
+        run: |
+          set +x
+          echo ${{ steps.branches_release.outputs.response }} 
+      
+      - name: branches_release_parsed_response
+        run: |
+          set +x
+          echo '${{ fromJson(steps.branches_release.outputs.response).status_code }}'
+

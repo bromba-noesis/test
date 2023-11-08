@@ -55,7 +55,7 @@ jobs:
         id: branches_dev
         with:
           url: https://api.github.com/repos/bromba-noesis/envs-public/branches/development/protection
-          method: "POST"
+          method: "GET"
           accept: 200, 404
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}   
@@ -75,7 +75,7 @@ jobs:
         id: branches_release
         with:
           url: https://api.github.com/repos/bromba-noesis/envs-public/branches/releasesss/**/protection
-          method: "POST"
+          method: "GET"
           accept: 200, 404
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}   

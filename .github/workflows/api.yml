@@ -18,6 +18,7 @@ jobs:
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
           body: '{ "reviewers":[{"type":"User","id":126766083}], "deployment_branch_policy":{"protected_branches":false,"custom_branch_policies":true} }'    # find user id here: https://caius.github.io/github_id/
+          log-response: false
           
       - name: env_response
         run: |
@@ -38,17 +39,7 @@ jobs:
           accept: 200, 303, 404
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
-          body: '{ "name":"release/**" }'   
-          
-      - name: env_branches_response
-        run: |
-          set +x
-          echo ${{ steps.env_branches.outputs.response }} 
-      
-      - name: env_branches_parsed_response
-        run: |
-          set +x
-          echo '${{ fromJson(steps.env_branches.outputs.response).status_code }}'
+          body: '{ "name":"release/**" }'
 
       - name: branches_dev
         uses: indiesdev/curl@v1.1
@@ -59,34 +50,15 @@ jobs:
           accept: 200, 404
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}   
-          
-      - name: branches_dev_response
-        run: |
-          set +x
-          echo ${{ steps.branches_dev.outputs.response }} 
-      
-      - name: branches_dev_parsed_response
-        run: |
-          set +x
-          echo '${{ fromJson(steps.branches_dev.outputs.response).status_code }}'
 
       - name: branches_release
         uses: indiesdev/curl@v1.1
         id: branches_release
         with:
-          url: https://api.github.com/repos/bromba-noesis/envs-public/branches/release//v1.0.0/protection
+          url: https://api.github.com/repos/bromba-noesis/envs-public/branches/release&#47;&#42;&#42;/protection
           method: "GET"
           accept: 200, 404
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}   
-          
-      - name: branches_release_response
-        run: |
-          set +x
-          echo ${{ steps.branches_release.outputs.response }} 
+          log-response: true
       
-      - name: branches_release_parsed_response
-        run: |
-          set +x
-          echo '${{ fromJson(steps.branches_release.outputs.response).status_code }}'
-

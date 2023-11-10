@@ -38,7 +38,11 @@ jobs:
           accept: 200, 404
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}   
-          log-response: true
+
+      - name: branches_response
+        run: |
+          set +x
+          echo ${{ steps.branches.outputs.response }} 
 
       - name: env_branches
         uses: indiesdev/curl@v1.1

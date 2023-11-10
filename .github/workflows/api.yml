@@ -58,7 +58,7 @@ jobs:
           url: https%3A%2F%2Fapi.github.com%2Frepos%2Fbromba-noesis%2Fenvs-public%2Fbranches%2Frelease%2Fv1.0.0%2Fprotection
           method: "GET"
           accept: 200, 404
-          headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
+          #headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}   
           log-response: true
       

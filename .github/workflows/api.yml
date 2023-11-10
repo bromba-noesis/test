@@ -32,6 +32,7 @@ jobs:
 
       - name: branches
         uses: indiesdev/curl@v1.1
+        id: branches
         with:
           url: https://api.github.com/repos/bromba-noesis/envs-public/branches
           method: "GET"

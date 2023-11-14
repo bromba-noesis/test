@@ -63,7 +63,12 @@ jobs:
           body: " \ { \ \"query\": \"query { viewer { login }}\" \ } \ "
           log-response: false
 
+      - name: branches_releases_response
+        run: |
+          set +x
+          echo ${{ steps.branches_releases.outputs.response }} 
+
       - name: branches_releases_parsed_response
         run: |
           set +x
-          echo '${{ fromJson(steps.branches_releases.outputs.response).login }}'
+          echo '${{ fromJson(steps.branches_releases.outputs.response).data.data.viewer.login }}'

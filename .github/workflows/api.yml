@@ -61,4 +61,9 @@ jobs:
           method: "POST"
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
           body: " \ { \ \"query\": \"query { viewer { login }}\" \ } \ "
-          log-response: true
+          log-response: false
+
+      - name: branches_releases_parsed_response
+        run: |
+          set +x
+          echo '${{ fromJson(steps.branches_releases.outputs.response).login }}'

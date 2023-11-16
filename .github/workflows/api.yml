@@ -61,7 +61,7 @@ jobs:
           method: "POST"
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
          #body: " \ { \ \"query\": \"query { viewer { login }}\" \ } \ "
-          body: " \ { \ \"query\": \"mutation CreateRepository($repositoryInput: CreateRepositoryInput!) \{ createRepository(input: $repositoryInput) \{ repository \{ id name url \} \} \} \", \"variables\": \{ \"repositoryInput\": \{ \"name\": \"xxx\", \"visibility\": \"PUBLIC\" \} \} \ } \ "
+          body: " \ { \ \"query\": \"mutation CreateRepository($repositoryInput: CreateRepositoryInput!) { createRepository(input: $repositoryInput) { repository { id name url } } } \", \"variables\": { \"repositoryInput\": { \"name\": \"xxx\", \"visibility\": \"PUBLIC\" } } \ } \ "
           log-response: false
 
       - name: branches_releases_response
@@ -69,7 +69,7 @@ jobs:
           set +x
           echo ${{ steps.branches_releases.outputs.response }} 
 
-      - name: branches_releases_parsed_response
-        run: |
-          set +x
-          echo '${{ fromJson(steps.branches_releases.outputs.response).data.data.viewer.login }}'
+      #- name: branches_releases_parsed_response
+      #  run: |
+      #    set +x
+      #    echo '${{ fromJson(steps.branches_releases.outputs.response).data.data.viewer.login }}'

@@ -60,8 +60,9 @@ jobs:
           url: https://api.github.com/graphql
           method: "POST"
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
-         #body: " \ { \ \"query\": \"query { viewer { login }}\" \ } \ "
-          body: " \ { \ \"query\": \"mutation CreateRepository($repositoryInput: CreateRepositoryInput!) { createRepository(input: $repositoryInput) { repository { id name url } } } \", \"variables\": { \"repositoryInput\": { \"name\": \"xxx\", \"visibility\": \"PUBLIC\" } } \ } \ "
+         #body: " \ { \ \"query\": \"query { viewer { login }}\" \ } \ " #login query
+         #body: " \ { \ \"query\": \"mutation CreateRepository($repositoryInput: CreateRepositoryInput!) { createRepository(input: $repositoryInput) { repository { id name url } } } \", \"variables\": { \"repositoryInput\": { \"name\": \"xxx\", \"visibility\": \"PUBLIC\" } } \ } \ " # create repo
+          body: " \ { \ \"query\": \"mutation CreateBranchProtectionRule($branchProtectionRuleInput: CreateBranchProtectionRuleInput!) { createBranchProtectionRule(input: $branchProtectionRuleInput) { branchProtectionRule  { id } } } \", \"variables\": { \"branchProtectionRuleInput\": { \"repositoryId\": \"R_kgDOKTOttg\", \"pattern\": \"release/**\" } } \ } \ "
           log-response: false
           timeout: 3000
 

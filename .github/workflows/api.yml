@@ -56,7 +56,7 @@ jobs:
       - name: get_repo_id
         env:
           GH_TOKEN: ${{ secrets.BROMBA_NOESIS_PAT2 }}
-        run: gh repo view bromba-noesis/test --json id
+        run: gh repo view bromba-noesis/test --json id --jq '.'
 
       - name: branches_releases
         uses: indiesdev/curl@v1.1

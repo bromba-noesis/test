@@ -68,7 +68,7 @@ jobs:
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
          #body: " \ { \ \"query\": \"query { viewer { login }}\" \ } \ " #login query
          #body: " \ { \ \"query\": \"mutation CreateRepository($repositoryInput: CreateRepositoryInput!) { createRepository(input: $repositoryInput) { repository { id name url } } } \", \"variables\": { \"repositoryInput\": { \"name\": \"xxx\", \"visibility\": \"PUBLIC\" } } \ } \ " # create repo
-          body: " \ { \ \"query\": \"mutation CreateBranchProtectionRule($branchProtectionRuleInput: CreateBranchProtectionRuleInput!) { createBranchProtectionRule(input: $branchProtectionRuleInput) { branchProtectionRule  { id } } } \", \"variables\": { \"branchProtectionRuleInput\": { \"repositoryId\": \"${{ steps.get_repo_id.outputs.my_repo_id }}\", \"pattern\": \"release/**\" } } \ } \ "
+          body: " \ { \ \"query\": \"mutation CreateBranchProtectionRule($branchProtectionRuleInput: CreateBranchProtectionRuleInput!) { createBranchProtectionRule(input: $branchProtectionRuleInput) { branchProtectionRule  { id } } } \", \"variables\": { \"branchProtectionRuleInput\": { \"repositoryId\": \"${{ steps.get_repo_id.outputs.my_repo_id }}\", \"pattern\": \"release/**\", \"requiresApprovingReviews\": true, \"requiredApprovingReviewCount\": 1 } } \ } \ "
           log-response: false
           timeout: 3000
 

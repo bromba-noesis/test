@@ -10,7 +10,7 @@ jobs:
     
       - name: create_qua_env
         uses: indiesdev/curl@v1.1
-        id: env
+        id: create_qua_env
         with:
           url: https://api.github.com/repos/bromba-noesis/test/environments/Quality
           method: "PUT"
@@ -32,7 +32,7 @@ jobs:
 
       - name: limit_qua_env_branches
         uses: indiesdev/curl@v1.1
-        id: env_branches
+        id: limit_qua_env_branches
         with:
           url: https://api.github.com/repos/bromba-noesis/envs-public/environments/Quality/deployment-branch-policies
           method: "POST"
@@ -43,7 +43,7 @@ jobs:
 
       - name: protect_dev_branch
         uses: indiesdev/curl@v1.1
-        id: branches_dev
+        id: protect_dev_branch
         with:
           url: https://api.github.com/repos/bromba-noesis/envs-public/branches/development/protection
           method: "PUT"

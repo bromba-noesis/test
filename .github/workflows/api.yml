@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-      - name: env
+      - name: create_qua_env
         uses: indiesdev/curl@v1.1
         id: env
         with:
-          url: https://api.github.com/repos/bromba-noesis/envs-public/environments/QA
+          url: https://api.github.com/repos/bromba-noesis/envs-public/environments/Quality
           method: "PUT"
           accept: 200, 422
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
@@ -20,28 +20,28 @@ jobs:
           body: '{ "reviewers":[{"type":"User","id":126766083}], "deployment_branch_policy":{"protected_branches":false,"custom_branch_policies":true} }'    # find user id here: https://caius.github.io/github_id/
           log-response: false
           
-      - name: env_response
+      - name: create_qua_env_response
         run: |
           set +x
-          echo ${{ steps.env.outputs.response }} 
+          echo ${{ steps.create_qua_env.outputs.response }} 
       
-      - name: env_parsed_response
+      - name: create_qua_env_parsed_response
         run: |
           set +x
-          echo '${{ fromJson(steps.env.outputs.response).status_code }}'
+          echo '${{ fromJson(steps.create_qua_env.outputs.response).status_code }}'
 
-      - name: env_branches
+      - name: limit_qua_env_branches
         uses: indiesdev/curl@v1.1
         id: env_branches
         with:
-          url: https://api.github.com/repos/bromba-noesis/envs-public/environments/QA/deployment-branch-policies
+          url: https://api.github.com/repos/bromba-noesis/envs-public/environments/Quality/deployment-branch-policies
           method: "POST"
           accept: 200, 303, 404
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
           body: '{ "name":"release/**" }'
 
-      - name: branches_dev
+      - name: protect_dev_branch
         uses: indiesdev/curl@v1.1
         id: branches_dev
         with:
@@ -54,11 +54,12 @@ jobs:
           log-response: true
 
       - name: get_repo_id
+        id: get_repo_id
         env:
           GH_TOKEN: ${{ secrets.BROMBA_NOESIS_PAT2 }}
         run: gh repo view bromba-noesis/test --json id --jq '.id'
 
-      - name: branches_releases
+      - name: protect_release_branches
         uses: indiesdev/curl@v1.1
         id: branches_releases
         with:
@@ -71,12 +72,7 @@ jobs:
           log-response: false
           timeout: 3000
 
-      - name: branches_releases_response
+      - name: protect_release_branches_response
         run: |
           set +x
-          echo ${{ steps.branches_releases.outputs.response }} 
-
-      #- name: branches_releases_parsed_response
-      #  run: |
-      #    set +x
-      #    echo '${{ fromJson(steps.branches_releases.outputs.response).data.data.viewer.login }}'
+          echo ${{ steps.protect_release_branches.outputs.response }} 

@@ -31,7 +31,7 @@ jobs:
       - name: set_var
         id: set_var
         uses: indiesdev/curl@v1.1
-        if: ${{ github.event.inputs.hasDB }}
+        if: ${{ github.event.inputs.hasDB == 'true' }}
         with:
           url: https://api.github.com/repos/bromba-noesis/${{ github.event.inputs.repoName }}/actions/variables
           method: "POST"

@@ -7,6 +7,18 @@ jobs:
   repo_setup:
     runs-on: ubuntu-latest
     steps:
+
+      - name: create_repo
+        id: create_repo
+        uses: indiesdev/curl@v1.1
+        with:
+          url: https://api.github.com/repos/bromba-noesis/template/generate
+          method: "POST"
+          accept: 201
+          headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
+          bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
+          body: '{ "name":"Hello-World", "include_all_branches": true, "private": false }'
+          log-response: false
     
       - name: create_qua_env
         id: create_qua_env
@@ -39,23 +51,6 @@ jobs:
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
           body: '{ "name":"release/**" }'
-
-      - name: protect_dev_branch
-        id: protect_dev_branch
-        uses: indiesdev/curl@v1.1
-        with:
-          url: https://api.github.com/repos/bromba-noesis/test/branches/development/protection
-          method: "PUT"
-          accept: 200, 403, 404, 422
-          headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
-          bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
-          body: '{"required_status_checks":{"strict":true,"contexts":["continuous-integration/travis-ci"]},"enforce_admins":true,"required_pull_request_reviews":{"dismissal_restrictions":{"users":["octocat"],"teams":["justice-league"]},"dismiss_stale_reviews":true,"require_code_owner_reviews":true,"required_approving_review_count":2,"require_last_push_approval":true,"bypass_pull_request_allowances":{"users":["octocat"],"teams":["justice-league"]}},"restrictions":{"users":["octocat"],"teams":["justice-league"],"apps":["super-ci"]},"required_linear_history":true,"allow_force_pushes":true,"allow_deletions":true,"block_creations":true,"required_conversation_resolution":true,"lock_branch":true,"allow_fork_syncing":true}'
-          log-response: false
-
-      - name: protect_dev_branch_response
-        run: |
-          set +x
-          echo ${{ steps.protect_dev_branch.outputs.response }} 
 
       - name: get_repo_id
         id: get_repo_id

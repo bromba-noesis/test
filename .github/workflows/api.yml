@@ -31,7 +31,7 @@ jobs:
       - name: set_var
         id: set_var
         uses: indiesdev/curl@v1.1
-        if: ${{ github.event.inputs.hasDB == 'true' }}
+        #if: ${{ github.event.inputs.hasDB == 'true' }}
         with:
           url: https://api.github.com/repos/bromba-noesis/${{ github.event.inputs.repoName }}/actions/variables
           method: "POST"
@@ -39,8 +39,7 @@ jobs:
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
           body: '{ "name": "HAS_DB", "value": true }'
-          log-response: false
-          timeout: 3000
+          log-response: true
     
       - name: create_qua_env
         id: create_qua_env

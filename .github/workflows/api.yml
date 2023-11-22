@@ -74,7 +74,17 @@ jobs:
           accept: 200, 303, 404
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
           bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
-          body: '{ "name":"release/**" }'
+          body: '{ "name": "release/**", "type": "branch" }'
+
+      - name: limit_qua_env_tags
+        uses: indiesdev/curl@v1.1
+        with:
+          url: https://api.github.com/repos/bromba-noesis/${{ github.event.inputs.repoName }}/environments/Quality/deployment-branch-policies
+          method: "POST"
+          accept: 200, 303, 404
+          headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
+          bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
+          body: '{ "name": "[0-9].[0-9].[0-9]", "type": "tag" }'
 
       - name: get_repo_id
         id: get_repo_id

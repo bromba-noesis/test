@@ -5,7 +5,7 @@ on:
 
 jobs:
   create_wiki:
-    uses: bromba-noesis/wiki/.github/workflows/wiki_project_create.yml@main
-    with:
-      projectName: ${{ github.event.repository.name }}
-    secrets: inherit
+      uses: bromba-noesis/wiki/.github/workflows/wiki_project_create.yml@main
+      with:
+        projectName: ${{ github.event.repository.name }}
+      secrets: inherit

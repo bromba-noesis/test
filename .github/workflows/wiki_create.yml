@@ -1,0 +1,11 @@
+name: create_wiki
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_wiki:
+    uses: bromba-noesis/wiki/.github/workflows/wiki_project_create.yml@main
+    with:
+      projectName: ${{ github.event.repository.name }}
+    secrets: inherit

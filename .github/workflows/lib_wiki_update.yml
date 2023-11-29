@@ -1,0 +1,22 @@
+name: lib_wiki_update
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lib_wiki_update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create_repo
+        id: create_repo
+        uses: indiesdev/curl@v1.1
+        with:
+          url: https://api.github.com/repos/bromba-noesis/wiki/actions/workflows/wiki_library_update.yml/dispatches
+          method: "POST"
+          accept: 204
+          headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'
+          bearer-token: ${{ secrets.BROMBA_NOESIS_PAT2 }}
+          body: '{ "ref": "main", "inputs":{ "myRepo": ${{ github.event.repository.name }}, "myEnvironment": "qua", myVersion: "0.0.1" }'
+          log-response: true
+          timeout: 3000
+  

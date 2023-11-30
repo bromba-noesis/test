@@ -7,8 +7,7 @@ jobs:
   lib_wiki_update:
     runs-on: ubuntu-latest
     steps:
-      - name: create_repo
-        id: create_repo
+      - name: lib_update
         uses: indiesdev/curl@v1.1
         with:
           url: https://api.github.com/repos/bromba-noesis/wiki/actions/workflows/wiki_library_update.yml/dispatches

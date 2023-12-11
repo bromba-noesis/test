@@ -10,7 +10,7 @@ jobs:
       - name: lib_update
         uses: indiesdev/curl@v1.1
         with:
-          url: https://api.github.com/repos/bromba-noesis/wiki/actions/workflows/wiki_library_update.yml/dispatches
+          url: https://api.github.com/repos/bromba-noesis/framework-repo/actions/workflows/wiki_library_update.yml/dispatches
           method: "POST"
           accept: 204
           headers: '{ "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }'

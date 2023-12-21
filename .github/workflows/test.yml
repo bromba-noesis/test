@@ -1,0 +1,13 @@
+name: test
+
+on: 
+    workflow_dispatch:
+
+jobs:
+  test1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: calls 
+        if: ${{ hashFiles('README.md') == '' }}
+        run: |
+          echo README.md found!!!

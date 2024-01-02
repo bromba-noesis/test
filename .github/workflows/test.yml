@@ -14,7 +14,10 @@ jobs:
 
       - name: versions
         id: versions
-        run: echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+        run: |
+          pwd
+          ls -la
+          echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: show
         run: echo ${{ env.RELEASE_VERSION }}

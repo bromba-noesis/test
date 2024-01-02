@@ -15,4 +15,4 @@ jobs:
       - name: versions
         run: |
           echo project_version=$(mvn help:evaluate -Dexpression=./pom.xml-project.version -q -DforceStdout) >> $GITHUB_ENV
-          echo ${{ project_version }}
+          echo ${{ GITHUB_ENV.project_version }}

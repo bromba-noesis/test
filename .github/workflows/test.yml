@@ -8,10 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check 
-        if: ${{ hashFiles('README.md') == '' }}
+        if: ${{ hashFiles('README.mdxx') == '' }}
         run: |
           echo README.md found!!!
 
       - name: versions
         run: |
-          echo project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV
+          echo project_version=$(mvn help:evaluate -Dexpression=./pom.xml-project.version -q -DforceStdout) >> $GITHUB_ENV
+          echo ${{ project_version }}

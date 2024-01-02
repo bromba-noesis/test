@@ -8,11 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check 
-        if: ${{ hashFiles('README.mdxx') == '' }}
+        if: ${{ hashFiles('README.mdxx') <> '' }}
         run: |
           echo README.md found!!!
 
       - name: versions
-        run: |
-          VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
-          echo "::set-output name=version::$VERSION"
+        id: versions
+        run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+
+      - name: show
+        run: echo ${{ steps.versions.outputs.version }}

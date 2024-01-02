@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check 
-        if: ${{ hashFiles('README.mdxx') != '' }}
+        if: ${{ hashFiles('README.md') != '' }}
         run: |
           echo README.md found!!!
 
       - name: versions
         id: versions
-        run: echo ::set-output name=version::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+        run: echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: show
-        run: echo ${{ steps.versions.outputs.version }}
+        run: echo ${{ env.RELEASE_VERSION }}

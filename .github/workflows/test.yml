@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check 
-        if: ${{ hashFiles('README.mdxx') <> '' }}
+        if: ${{ hashFiles('README.mdxx') != '' }}
         run: |
           echo README.md found!!!
 

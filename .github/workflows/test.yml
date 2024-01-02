@@ -7,7 +7,11 @@ jobs:
   test1:
     runs-on: ubuntu-latest
     steps:
-      - name: calls 
+      - name: check 
         if: ${{ hashFiles('README.md') == '' }}
         run: |
           echo README.md found!!!
+
+      - name: versions
+        run: |
+          mvn --version

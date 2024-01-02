@@ -10,16 +10,14 @@ jobs:
       - uses: actions/checkout@v3
     
       - name: check 
-        if: ${{ hashFiles('README.mdxxx') != '' }}
+        if: ${{ hashFiles('README.md') != '' }}
         run: |
           echo README.md found!!!
 
       - name: versions
         id: versions
-        run: |
-          pwd
-          ls -la
-          echo "myVar=$(mvn help:evaluate -Dexpression=project.packaging -q -DforceStdout)" >> $GITHUB_ENV
+        run: echo "myVar=$(mvn help:evaluate -Dexpression=build.extensions.extension.version -q -DforceStdout)" >> $GITHUB_ENV
+        # echo "myVar=$(mvn help:evaluate -Dexpression=project.packaging -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: show
         run: echo ${{ env.myVar }}

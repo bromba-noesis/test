@@ -14,4 +14,4 @@ jobs:
 
       - name: versions
         run: |
-          mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+          echo project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_ENV

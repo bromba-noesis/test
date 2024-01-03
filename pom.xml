@@ -11,9 +11,9 @@
 	<!-- **************** PROJECT INFO **************** -->
 	<!-- ********************************************** -->
 	<parent>
-	  <groupId>org.webjars.npm</groupId>
-	  <artifactId>xml</artifactId>
-	  <version>1.0.1</version>
+	    <groupId>jakarta.xml.rpc</groupId>
+	    <artifactId>jakarta.xml.rpc-api</artifactId>
+	    <version>1.1.4</version>
 	</parent>
 	<groupId>com.novobanco.ms.businesslogs</groupId>
 	<artifactId>ms-oca-businesslogs</artifactId>

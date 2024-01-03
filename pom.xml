@@ -11,8 +11,6 @@
 	<!-- **************** PROJECT INFO **************** -->
 	<!-- ********************************************** -->
 	<parent>
-		<groupId>com.novobanco.ms</groupId>
-		<artifactId>ms-nb-fwk</artifactId>
 		<version>9.3.0.RELEASE</version>
 	</parent>
 	<groupId>com.novobanco.ms.businesslogs</groupId>

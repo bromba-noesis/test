@@ -18,7 +18,6 @@
 	<groupId>com.novobanco.ms.businesslogs</groupId>
 	<artifactId>ms-oca-businesslogs</artifactId>
 	<version>${revision}${sha1}${changelist}</version>
-	<packaging>pom</packaging>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>${project.artifactId} root POM</description>
 	<url>https://www.novobanco.pt</url>

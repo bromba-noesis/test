@@ -1,47 +1,282 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>JSPSample</groupId>
-  <artifactId>JSPSample</artifactId>
-  <version>0.0.2</version>
-  <packaging>war</packaging>
-  <name>jspsample</name>
-  <description>
-test3</description>
-<properties>
-  <sonar.organization>noesis-devops</sonar.organization>
-  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-</properties>
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.3.2</version>
-        <configuration>
-          <warSourceDirectory>WebContent</warSourceDirectory>
-	  <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.sonarsource.scanner.maven</groupId>
-        <artifactId>sonar-maven-plugin</artifactId>
-        <version>3.9.1.2184</version>
-      </plugin>
-    </plugins>
-<extensions>
-      <extension>
-          <groupId>io.opentelemetry.contrib</groupId>
-          <artifactId>opentelemetry-maven-extension</artifactId>
-          <version>1.10.0-alpha</version>
-      </extension>
-    </extensions>
-  </build>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<prerequisites>
+		<maven>${maven.version}</maven>
+	</prerequisites>
+
+	<!-- ********************************************** -->
+	<!-- **************** PROJECT INFO **************** -->
+	<!-- ********************************************** -->
+	<parent>
+		<groupId>com.novobanco.ms</groupId>
+		<artifactId>ms-nb-fwk</artifactId>
+		<version>9.3.0.RELEASE</version>
+	</parent>
+	<groupId>com.novobanco.ms.businesslogs</groupId>
+	<artifactId>ms-oca-businesslogs</artifactId>
+	<version>${revision}${sha1}${changelist}</version>
+	<packaging>pom</packaging>
+	<name>${project.groupId}:${project.artifactId}</name>
+	<description>${project.artifactId} root POM</description>
+	<url>https://www.novobanco.pt</url>
+	<inceptionYear>2019</inceptionYear>
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<!-- ********************************************** -->
+	<!-- *********** ORGANIZATION AND MEMBERS ********* -->
+	<!-- ********************************************** -->
+
+	<organization>
+		<name>NovoBanco</name>
+		<url>https://www.novobanco.pt</url>
+	</organization>
+	<developers>
+		<developer> 
+			<id>T02988</id> 
+			<name>Pedro Patrão</name> 
+			<email>pedro.patrao@novobanco.pt</email> 
+			<organization>Deloitte</organization> 
+			<organizationUrl>https://www.deloitte.pt</organizationUrl> 
+			<roles> 
+				<role>architect</role>
+				<role>developer</role> 
+			</roles> 
+			<timezone>Europe/Lisbon</timezone> 
+		</developer>
+	</developers>
+
+	<!-- ********************************************** -->
+	<!-- ************ RESOURCES AND SERVICES ********** -->
+	<!-- ********************************************** -->
+	
+	<scm> 
+		<connection>scm:git:https://bitbucket.bdso.tech/scm/omnicharch/ms-oca-businesslogs.git</connection> 
+		<developerConnection>scm:git:https://bitbucket.bdso.tech/scm/omnicharch/ms-oca-businesslogs.git</developerConnection> 
+		<tag>head</tag> 
+		<url>https://bitbucket.bdso.tech/projects/OMNICHARCH/repos/ms-oca-businesslogs/browse</url> 
+	</scm>
+	<issueManagement>
+		<system>Jira</system>
+		<url>https://jira.bdso.tech/secure/Dashboard.jspa</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>https://jenkins.bdso.tech/</url>
+	</ciManagement>
+	<distributionManagement>
+		<site>
+	        <id>artifactory</id>
+	        <url>dav:${base.artifactory.url}/nb-digital-generic-documentation/${project.groupId}/${project.artifactId}/${project.version}</url>
+	    </site>
+		<repository>
+			<id>artifactory</id>
+			<name>Internal Releases</name>
+			<url>https://artifactory.bdso.tech/artifactory/nb-omnicharch-maven-releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>artifactory</id>
+			<name>Internal Snapshots</name>
+			<url>https://artifactory.bdso.tech/artifactory/nb-omnicharch-maven-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- ********************************************** -->
+	<!-- ****************** REPOSITORIES ************** -->
+	<!-- ********************************************** -->
+	
+	<repositories>
+        <repository>
+            <id>artifactory</id>
+            <name>Maven Repository</name>
+            <layout>default</layout>
+            <url>https://artifactory.bdso.tech/artifactory/nb-omnicharch-maven-public</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>artifactory</id>
+            <name>Maven Repository</name>
+            <layout>default</layout>
+            <url>https://artifactory.bdso.tech/artifactory/nb-omnicharch-maven-public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+	<!-- ********************************************** -->
+	<!-- ****************** PROFILES ****************** -->
+	<!-- ********************************************** -->
+	
+	<profiles>
+		<profile>
+			<id>cloud</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<sonar.branch.name>${scmBranch}</sonar.branch.name>
+			</properties>
+		</profile>
+	</profiles>
+
+	<!-- ********************************************** -->
+	<!-- **************** PROPERTIES ****************** -->
+	<!-- ********************************************** -->
+
+	<properties>
+		<revision>2.3.0</revision>
+		<sha1 />
+		<changelist />
+
+		<main.basedir>./</main.basedir>
+		<sitedoc.project.skip>false</sitedoc.project.skip>
+
+		<build.utils.resources.skip>false</build.utils.resources.skip>
+		<build.utils.resources.location>${project.build.directory}/generated-resources/resources/</build.utils.resources.location>
+		<build.utils.formatter.skip>true</build.utils.formatter.skip>
+		<build.utils.license.skip>true</build.utils.license.skip>
+
+		<!-- ============================================== -->
+		<!-- ============= DEPENDENCIES VERSION =========== -->
+		<!-- ============================================== -->
+		
+		<dependency.httpcore.version>4.4.11</dependency.httpcore.version>
+		<sonar.exclusions>**/bo/*.java,**/entity/*.java,**/model/*.java,target/generated-sources/**</sonar.exclusions>
+		
+		<!-- ============================================== -->
+        <!-- =========== DOC AUTO GEN PROPERTIES ========== -->
+        <!-- ============================================== -->
+          
+        <docautogen.property.file.dir>ms-oca-businesslogs-boot/target/classes</docautogen.property.file.dir>
+        
+        <!-- ============================================================ -->
+        <!-- =========== MICROSERVICE DOCUMENTATION PROPERTIES ========== -->
+        <!-- ============================================================ -->
+          
+        <site.owner>Novo Banco</site.owner>
+        <site.customer-journey>Cross IT</site.customer-journey>
+        <site.auth-roles>BL_BASE, STF_BASE</site.auth-roles>
+        <site.database>N/A</site.database>
+ 
+        <site.component.database>No</site.component.database>
+		
+	</properties>
+	
+	<!-- ********************************************** -->
+	<!-- ******************* BUILD ******************** -->
+	<!-- ********************************************** -->
+
+	<!-- managed by the framework -->
+
+	<!-- ********************************************** -->
+	<!-- ****************** REPORTS ******************* -->
+	<!-- ********************************************** -->
+
+	<!-- managed by the framework -->
+
+	<!-- ********************************************** -->
+	<!-- ********* Dependencies Management ************ -->
+	<!-- ********************************************** -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>ms-oca-businesslogs-http-controller</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>ms-oca-businesslogs-business-logic</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>ms-oca-businesslogs-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>ms-oca-businesslogs-data</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- elasticsearch override -->
+			<dependency>
+				<groupId>org.elasticsearch</groupId>
+				<artifactId>elasticsearch</artifactId>
+				<version>8.2.3</version>
+				<scope>compile</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.hdrhistogram</groupId>
+						<artifactId>HdrHistogram</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.elasticsearch.client</groupId>
+				<artifactId>elasticsearch-rest-client</artifactId>
+				<version>8.2.3</version>
+			</dependency>
+			<dependency>
+					<groupId>jakarta.json</groupId>
+					<artifactId>jakarta.json-api</artifactId>
+					<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>co.elastic.clients</groupId>
+				<artifactId>elasticsearch-java</artifactId>
+				<version>8.2.3</version>
+			</dependency>
+			
+		</dependencies>
+	</dependencyManagement>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.novobanco.ms.fwk</groupId>
+			<artifactId>ms-nb-fwk-build</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>pl.project13.maven</groupId>
+					<artifactId>git-commit-id-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+	<!-- ********************************************** -->
+	<!-- ****************** Modules ******************* -->
+	<!-- ********************************************** -->
+	
+	<modules>
+		<module>ms-oca-businesslogs-business-logic</module>
+		<module>ms-oca-businesslogs-data</module>
+		<module>ms-oca-businesslogs-model</module>
+		<module>ms-oca-businesslogs-http-controller</module>
+		<module>ms-oca-businesslogs-boot</module>
+	</modules>
 </project>

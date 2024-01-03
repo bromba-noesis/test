@@ -17,8 +17,8 @@ jobs:
       - name: versions
         id: versions
         run: |
-          xml_versionValue=$(awk -F'[><]' '/<version>/{print $3}' pom.xml)
-          echo "myVar=$xml_versionValue" >> $GITHUB_ENV
+          
+          echo "myVar=$(awk -F'[><]' '/<version>/{print $3}' pom.xml)" >> $GITHUB_ENV
         
         #echo "myVar=$(mvn help:evaluate -Dexpression=project.build.extensions.extension.version -q -DforceStdout)" >> $GITHUB_ENV
         # echo "myVar=$(mvn help:evaluate -Dexpression=project.packaging -q -DforceStdout)" >> $GITHUB_ENV

@@ -124,13 +124,7 @@
 
 	<!-- managed by the framework -->
 	
-	<dependencies>
-		<dependency>
-			<groupId>com.novobanco.ms.fwk</groupId>
-			<artifactId>ms-nb-fwk-build</artifactId>
-		</dependency>
-	</dependencies>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>

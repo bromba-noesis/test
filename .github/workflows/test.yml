@@ -12,8 +12,7 @@ jobs:
       - name: versions 
         run: |
           $x = [xml](gc pom.xml)
-          $x.project.parent.version | fl
-          #echo "libVersion=$($x.project.parent.version | fl)" >> $GITHUB_ENV
+          echo libVersion=$($x.project.parent.version | fl) >> $GITHUB_ENV
 
   test2:
     runs-on: ubuntu-latest

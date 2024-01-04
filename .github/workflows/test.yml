@@ -15,7 +15,7 @@ jobs:
           $x = [xml](gc pom.xml)
           $lver = $x.project.parent.version | fl
           echo $lver
-          echo "libVersion=$lver" | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append
+          echo "libVersion=$lver" >> $Env:GITHUB_OUTPUT
 
   test2:
     runs-on: ubuntu-latest
@@ -36,4 +36,6 @@ jobs:
           #echo "myVar=$(mvn help:evaluate -Dexpression=project.modelVersion -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: show
+        env:
+          libVersion: ${{needs.test1.outputs.libVersion}}
         run: echo ${{ env.libVersion }}

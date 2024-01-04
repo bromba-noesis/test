@@ -10,9 +10,11 @@ jobs:
       - uses: actions/checkout@v3
     
       - name: versions 
+        shell: pwsh
         run: |
           $x = [xml](gc pom.xml)
-          echo (libVersion=$x.project.parent.version | fl) >> $env:GITHUB_ENV
+          $lver = $x.project.parent.version | fl
+          echo "libVersion=$($env:lver)" >> $GITHUB_ENV
 
   test2:
     runs-on: ubuntu-latest

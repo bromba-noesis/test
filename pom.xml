@@ -11,9 +11,9 @@
 	<!-- **************** PROJECT INFO **************** -->
 	<!-- ********************************************** -->
 	<parent>
-	    <groupId>javax.xml</groupId>
-	    <artifactId>namespace</artifactId>
-	    <version>1.0.1</version>
+		<groupId>org.apache.maven</groupId>
+	        <artifactId>maven-parent</artifactId>
+	        <version>41</version>
 	</parent>
 	<groupId>com.novobanco.ms.businesslogs</groupId>
 	<artifactId>ms-oca-businesslogs</artifactId>

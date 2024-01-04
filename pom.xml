@@ -11,13 +11,14 @@
 	<!-- **************** PROJECT INFO **************** -->
 	<!-- ********************************************** -->
 	<parent>
-		<groupId>org.apache.maven</groupId>
-	        <artifactId>maven-parent</artifactId>
-	        <version>41</version>
+		<groupId>com.novobanco.ms</groupId>
+		<artifactId>ms-nb-fwk</artifactId>
+		<version>9.3.0.RELEASE</version>
 	</parent>
 	<groupId>com.novobanco.ms.businesslogs</groupId>
 	<artifactId>ms-oca-businesslogs</artifactId>
 	<version>${revision}${sha1}${changelist}</version>
+	<packaging>pom</packaging>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>${project.artifactId} root POM</description>
 	<url>https://www.novobanco.pt</url>
@@ -52,6 +53,74 @@
 			<timezone>Europe/Lisbon</timezone> 
 		</developer>
 	</developers>
+
+	<!-- ********************************************** -->
+	<!-- ************ RESOURCES AND SERVICES ********** -->
+	<!-- ********************************************** -->
+	
+	<scm> 
+		<connection>scm:git:https://bitbucket.bdso.tech/scm/omnicharch/ms-oca-businesslogs.git</connection> 
+		<developerConnection>scm:git:https://bitbucket.bdso.tech/scm/omnicharch/ms-oca-businesslogs.git</developerConnection> 
+		<tag>head</tag> 
+		<url>https://bitbucket.bdso.tech/projects/OMNICHARCH/repos/ms-oca-businesslogs/browse</url> 
+	</scm>
+	<issueManagement>
+		<system>Jira</system>
+		<url>https://jira.bdso.tech/secure/Dashboard.jspa</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>https://jenkins.bdso.tech/</url>
+	</ciManagement>
+	<distributionManagement>
+		<site>
+	        <id>artifactory</id>
+	        <url>dav:${base.artifactory.url}/nb-digital-generic-documentation/${project.groupId}/${project.artifactId}/${project.version}</url>
+	    </site>
+		<repository>
+			<id>artifactory</id>
+			<name>Internal Releases</name>
+			<url>https://artifactory.bdso.tech/artifactory/nb-omnicharch-maven-releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>artifactory</id>
+			<name>Internal Snapshots</name>
+			<url>https://artifactory.bdso.tech/artifactory/nb-omnicharch-maven-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- ********************************************** -->
+	<!-- ****************** REPOSITORIES ************** -->
+	<!-- ********************************************** -->
+	
+	<repositories>
+        <repository>
+            <id>artifactory</id>
+            <name>Maven Repository</name>
+            <layout>default</layout>
+            <url>https://artifactory.bdso.tech/artifactory/nb-omnicharch-maven-public</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>artifactory</id>
+            <name>Maven Repository</name>
+            <layout>default</layout>
+            <url>https://artifactory.bdso.tech/artifactory/nb-omnicharch-maven-public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
 
 	<!-- ********************************************** -->
 	<!-- ****************** PROFILES ****************** -->
@@ -123,8 +192,71 @@
 	<!-- ********************************************** -->
 
 	<!-- managed by the framework -->
-	
 
+	<!-- ********************************************** -->
+	<!-- ********* Dependencies Management ************ -->
+	<!-- ********************************************** -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>ms-oca-businesslogs-http-controller</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>ms-oca-businesslogs-business-logic</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>ms-oca-businesslogs-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>ms-oca-businesslogs-data</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- elasticsearch override -->
+			<dependency>
+				<groupId>org.elasticsearch</groupId>
+				<artifactId>elasticsearch</artifactId>
+				<version>8.2.3</version>
+				<scope>compile</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>org.hdrhistogram</groupId>
+						<artifactId>HdrHistogram</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.elasticsearch.client</groupId>
+				<artifactId>elasticsearch-rest-client</artifactId>
+				<version>8.2.3</version>
+			</dependency>
+			<dependency>
+					<groupId>jakarta.json</groupId>
+					<artifactId>jakarta.json-api</artifactId>
+					<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>co.elastic.clients</groupId>
+				<artifactId>elasticsearch-java</artifactId>
+				<version>8.2.3</version>
+			</dependency>
+			
+		</dependencies>
+	</dependencyManagement>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.novobanco.ms.fwk</groupId>
+			<artifactId>ms-nb-fwk-build</artifactId>
+		</dependency>
+	</dependencies>
+	
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -136,4 +268,15 @@
 		</pluginManagement>
 	</build>
 	
+	<!-- ********************************************** -->
+	<!-- ****************** Modules ******************* -->
+	<!-- ********************************************** -->
+	
+	<modules>
+		<module>ms-oca-businesslogs-business-logic</module>
+		<module>ms-oca-businesslogs-data</module>
+		<module>ms-oca-businesslogs-model</module>
+		<module>ms-oca-businesslogs-http-controller</module>
+		<module>ms-oca-businesslogs-boot</module>
+	</modules>
 </project>

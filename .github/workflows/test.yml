@@ -17,7 +17,7 @@ jobs:
       - name: versions
         id: versions
         run: |
-          echo "myVar=$(awk -v RS="^$" '{ x=index($0, "<project ") s=substr($0,x) sub(/[^>]*\smodelVersion="/,"", s) sub(/".*/,"", s) print s}' pom.xml)" >> $GITHUB_ENV
+          xmllint 
           
           #echo "myVar=$(mvn help:evaluate -Dexpression=project.properties.revision -q -DforceStdout)" >> $GITHUB_ENV
           #echo "myVar=$(mvn help:evaluate -Dexpression=project.modelVersion -q -DforceStdout)" >> $GITHUB_ENV

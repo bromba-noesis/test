@@ -123,63 +123,6 @@
 	<!-- ********************************************** -->
 
 	<!-- managed by the framework -->
-
-	<!-- ********************************************** -->
-	<!-- ********* Dependencies Management ************ -->
-	<!-- ********************************************** -->
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>ms-oca-businesslogs-http-controller</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>ms-oca-businesslogs-business-logic</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>ms-oca-businesslogs-model</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>${project.groupId}</groupId>
-				<artifactId>ms-oca-businesslogs-data</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<!-- elasticsearch override -->
-			<dependency>
-				<groupId>org.elasticsearch</groupId>
-				<artifactId>elasticsearch</artifactId>
-				<version>8.2.3</version>
-				<scope>compile</scope>
-				<exclusions>
-					<exclusion>
-						<groupId>org.hdrhistogram</groupId>
-						<artifactId>HdrHistogram</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.elasticsearch.client</groupId>
-				<artifactId>elasticsearch-rest-client</artifactId>
-				<version>8.2.3</version>
-			</dependency>
-			<dependency>
-					<groupId>jakarta.json</groupId>
-					<artifactId>jakarta.json-api</artifactId>
-					<version>2.0.1</version>
-			</dependency>
-			<dependency>
-				<groupId>co.elastic.clients</groupId>
-				<artifactId>elasticsearch-java</artifactId>
-				<version>8.2.3</version>
-			</dependency>
-			
-		</dependencies>
-	</dependencyManagement>
 	
 	<dependencies>
 		<dependency>
@@ -199,15 +142,4 @@
 		</pluginManagement>
 	</build>
 	
-	<!-- ********************************************** -->
-	<!-- ****************** Modules ******************* -->
-	<!-- ********************************************** -->
-	
-	<modules>
-		<module>ms-oca-businesslogs-business-logic</module>
-		<module>ms-oca-businesslogs-data</module>
-		<module>ms-oca-businesslogs-model</module>
-		<module>ms-oca-businesslogs-http-controller</module>
-		<module>ms-oca-businesslogs-boot</module>
-	</modules>
 </project>

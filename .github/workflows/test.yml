@@ -38,4 +38,5 @@ jobs:
       - name: show
         env:
           libVersion: ${{needs.test1.outputs.libVersion}}
-        run: echo ${{ env.libVersion }}
+        #run: echo ${{ env.libVersion }}
+        run: echo $libVersion

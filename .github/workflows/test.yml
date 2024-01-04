@@ -39,4 +39,4 @@ jobs:
         env:
           libVersion: ${{needs.test1.outputs.libVersion}}
         #run: echo ${{ env.libVersion }}
-        run: echo $libVersion
+        run: echo "$libVersion"

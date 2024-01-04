@@ -7,6 +7,8 @@ jobs:
   test1:
     runs-on: windows-latest
     outputs:
+        libGroup-output: ${{ steps.versions.outputs.libGroup }}
+        libArtifact-output: ${{ steps.versions.outputs.libArtifact }}
         libVersion-output: ${{ steps.versions.outputs.libVersion }}
     steps:
       - uses: actions/checkout@v3
@@ -16,8 +18,18 @@ jobs:
         shell: pwsh
         run: |
           $x = [xml](gc pom.xml)
+
+          $lgrp = $x.project.parent.groupId | fl | Out-String
+          echo $lgrp
+
+          $lart = $x.project.parent.artifactId | fl | Out-String
+          echo $lart
+          
           $lver = $x.project.parent.version | fl | Out-String
           echo $lver
+
+          echo "libGroup=$lgrp" >> $Env:GITHUB_OUTPUT
+          echo "libArtifact=$lart" >> $Env:GITHUB_OUTPUT
           echo "libVersion=$lver" >> $Env:GITHUB_OUTPUT
 
   test2:
@@ -40,6 +52,11 @@ jobs:
 
       - name: show
         env:
+          libGroup: ${{needs.test1.outputs.libGroup-output}}
+          libArtifact: ${{needs.test1.outputs.libArtifact-output}}
           libVersion: ${{needs.test1.outputs.libVersion-output}}
         #run: echo ${{ env.libVersion }}
-        run: echo "$libVersion"
+        run: |
+          echo "libGroup: $libGroup"
+          echo "libArtifact: $libArtifact"
+          echo "libVersion: $libVersion"

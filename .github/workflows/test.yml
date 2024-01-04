@@ -17,7 +17,7 @@ jobs:
       - name: versions
         id: versions
         run: |
-          xml
+          echo "myVar=$(perl -0777 -lnE 'say $1 if /(?:\s|>)<project[\s\S]*?\smodelVersion="([^"]+)"/m' pom.xml)" >> $GITHUB_ENV
           
           #echo "myVar=$(mvn help:evaluate -Dexpression=project.properties.revision -q -DforceStdout)" >> $GITHUB_ENV
           #echo "myVar=$(mvn help:evaluate -Dexpression=project.modelVersion -q -DforceStdout)" >> $GITHUB_ENV

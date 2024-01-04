@@ -6,10 +6,13 @@ on:
 jobs:
   test1:
     runs-on: windows-latest
+    outputs:
+        libVersion-output: ${{ steps.versions.outputs.libVersion }}
     steps:
       - uses: actions/checkout@v3
     
       - name: versions 
+        id: versions
         shell: pwsh
         run: |
           $x = [xml](gc pom.xml)
@@ -37,6 +40,6 @@ jobs:
 
       - name: show
         env:
-          libVersion: ${{needs.test1.outputs.libVersion}}
+          libVersion: ${{needs.test1.outputs.libVersion-output}}
         #run: echo ${{ env.libVersion }}
         run: echo "$libVersion"

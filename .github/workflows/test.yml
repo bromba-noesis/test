@@ -15,7 +15,7 @@ jobs:
           $x = [xml](gc pom.xml)
           $lver = $x.project.parent.version | fl
           echo $lver
-          Write-Host "libVersion=$lver" >> $GITHUB_ENV
+          echo "libVersion=$lver" >> $GITHUB_ENV
 
   test2:
     runs-on: ubuntu-latest

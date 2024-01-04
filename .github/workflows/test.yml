@@ -17,8 +17,8 @@ jobs:
       - name: versions
         id: versions
         run: |
-          echo "myVar=$(mvn help:evaluate -Dexpression=project.properties.revision -q -DforceStdout)" >> $GITHUB_ENV
-        # echo "myVar=$(mvn help:evaluate -Dexpression=project.packaging -q -DforceStdout)" >> $GITHUB_ENV
+          #echo "myVar=$(mvn help:evaluate -Dexpression=project.properties.revision -q -DforceStdout)" >> $GITHUB_ENV
+          echo "myVar=$(mvn help:evaluate -Dexpression=project.modelVersion -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: show
         run: echo ${{ env.myVar }}

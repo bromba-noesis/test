@@ -12,10 +12,11 @@ jobs:
       - name: versions 
         run: |
           Select-Xml -Path pom.xml -XPath '/project/properties/revision'
-          myVar=$(Select-Xml -Path pom.xml -XPath '/project/properties/revision') >> $GITHUB_ENV
+          #myVar=$(Select-Xml -Path pom.xml -XPath '/project/properties/revision') >> $GITHUB_ENV
 
   test2:
     runs-on: ubuntu-latest
+    needs: test1
     steps:
       - uses: actions/checkout@v3
     

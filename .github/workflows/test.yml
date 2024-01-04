@@ -16,7 +16,7 @@ jobs:
         shell: pwsh
         run: |
           $x = [xml](gc pom.xml)
-          $lver = $x.project.parent.version | fl
+          $lver = $x.project.parent.version | fl | Out-String
           echo $lver
           echo "libVersion=$lver" >> $Env:GITHUB_OUTPUT
 

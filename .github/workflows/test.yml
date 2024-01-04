@@ -17,7 +17,7 @@ jobs:
       - name: versions
         id: versions
         run: |
-          ruby
+          ruby -r nokogiri -e 'doc=Nokogiri::XML($<.read)
           
           #echo "myVar=$(mvn help:evaluate -Dexpression=project.properties.revision -q -DforceStdout)" >> $GITHUB_ENV
           #echo "myVar=$(mvn help:evaluate -Dexpression=project.modelVersion -q -DforceStdout)" >> $GITHUB_ENV

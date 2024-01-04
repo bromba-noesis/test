@@ -11,7 +11,7 @@ jobs:
     
       - name: versions 
         run: |
-          Select-Xml -Path pom.xml -XPath '/project/properties/revision'
+          Select-Xml -Path pom.xml -XPath '/project/modelVersion'
           #myVar=$(Select-Xml -Path pom.xml -XPath '/project/properties/revision') >> $GITHUB_ENV
 
   test2:

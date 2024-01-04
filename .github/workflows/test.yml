@@ -12,23 +12,23 @@ jobs:
       - name: versions 
         run: |
           $x = [xml](gc pom.xml)
-          echo libVersion=$($x.project.parent.version | fl) >> $GITHUB_ENV
+          echo ("libVersion=" $x.project.parent.version | fl) >> $env:GITHUB_ENV
 
   test2:
     runs-on: ubuntu-latest
     needs: test1
     steps:
-      - uses: actions/checkout@v3
+      #- uses: actions/checkout@v3
     
-      - name: check 
-        if: ${{ hashFiles('README.md') != '' }}
-        run: |
-          echo README.md found!!!
+      #- name: check 
+      #  if: ${{ hashFiles('README.md') != '' }}
+      #  run: |
+      #    echo README.md found!!!
 
-      - name: versions
-        id: versions
-        run: |
-          echo -
+      #- name: versions
+      #  id: versions
+      #  run: |
+      #    echo -
           #echo "myVar=$(mvn help:evaluate -Dexpression=project.properties.revision -q -DforceStdout)" >> $GITHUB_ENV
           #echo "myVar=$(mvn help:evaluate -Dexpression=project.modelVersion -q -DforceStdout)" >> $GITHUB_ENV
 

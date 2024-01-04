@@ -11,7 +11,9 @@ jobs:
         libArtifact-output: ${{ steps.versions.outputs.libArtifact }}
         libVersion-output: ${{ steps.versions.outputs.libVersion }}
     steps:
-      - uses: actions/checkout@v3
+      #- uses: actions/checkout@v3
+      - name: checkout
+        run: git sparse-checkout init --cone
     
       - name: versions 
         id: versions
@@ -45,17 +47,13 @@ jobs:
 
       #- name: versions
       #  id: versions
-      #  run: |
-      #    echo -
-          #echo "myVar=$(mvn help:evaluate -Dexpression=project.properties.revision -q -DforceStdout)" >> $GITHUB_ENV
-          #echo "myVar=$(mvn help:evaluate -Dexpression=project.modelVersion -q -DforceStdout)" >> $GITHUB_ENV
+      #  run: echo "myVar=$(mvn help:evaluate -Dexpression=project.modelVersion -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: show
         env:
           libGroup: ${{needs.test1.outputs.libGroup-output}}
           libArtifact: ${{needs.test1.outputs.libArtifact-output}}
           libVersion: ${{needs.test1.outputs.libVersion-output}}
-        #run: echo ${{ env.libVersion }}
         run: |
           echo "libGroup: $libGroup"
           echo "libArtifact: $libArtifact"

@@ -7,16 +7,16 @@ jobs:
   test1:
     runs-on: windows-latest
     outputs:
-        libGroup-output: ${{ steps.versions.outputs.libGroup }}
-        libArtifact-output: ${{ steps.versions.outputs.libArtifact }}
-        libVersion-output: ${{ steps.versions.outputs.libVersion }}
+        libGroup-output: ${{ steps.values.outputs.libGroup }}
+        libArtifact-output: ${{ steps.values.outputs.libArtifact }}
+        libVersion-output: ${{ steps.values.outputs.libVersion }}
     steps:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: 'pom.xml'
     
-      - name: versions 
-        id: versions
+      - name: values 
+        id: values
         shell: pwsh
         run: |
           $x = [xml](gc pom.xml)
@@ -44,10 +44,6 @@ jobs:
       #  if: ${{ hashFiles('README.md') != '' }}
       #  run: |
       #    echo README.md found!!!
-
-      #- name: versions
-      #  id: versions
-      #  run: echo "myVar=$(mvn help:evaluate -Dexpression=project.modelVersion -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: show
         env:

@@ -14,9 +14,9 @@ jobs:
     steps:
       - name: show
         env:
-          libGroup: ${{needs.get-xml-values.outputs.libGroup-output}}
-          libArtifact: ${{needs.get-xml-values.outputs.libArtifact-output}}
-          libVersion: ${{needs.get-xml-values.outputs.libVersion-output}}
+          libGroup: ${{needs.get-xml-values.outputs.libGroup}}
+          libArtifact: ${{needs.get-xml-values.outputs.libArtifact}}
+          libVersion: ${{needs.get-xml-values.outputs.libVersion}}
         run: |
           echo "libGroup: $libGroup"
           echo "libArtifact: $libArtifact"

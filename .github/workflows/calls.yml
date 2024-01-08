@@ -14,10 +14,12 @@ jobs:
     steps:
       - name: show
         env:
+          projVersion: ${{needs.get-xml-values.outputs.projVersion}}
           libGroup: ${{needs.get-xml-values.outputs.libGroup}}
           libArtifact: ${{needs.get-xml-values.outputs.libArtifact}}
           libVersion: ${{needs.get-xml-values.outputs.libVersion}}
         run: |
+          echo "projVersion: $projVersion"
           echo "libGroup: $libGroup"
           echo "libArtifact: $libArtifact"
           echo "libVersion: $libVersion"

@@ -4,22 +4,28 @@ on:
     workflow_dispatch:
 
 jobs:
-  get-xml-values:
-    uses: bromba-noesis/workflows-repo/.github/workflows/xml_values.yml@main
+  get-xml-java-values:
+    uses: bromba-noesis/workflows-repo/.github/workflows/xml_java_values.yml@main
+    secrets: inherit
+
+  get-xml-dotnet-values:
+    uses: bromba-noesis/workflows-repo/.github/workflows/xml_dotnet_values.yml@main
     secrets: inherit
 
   echo-xml-values:
     runs-on: ubuntu-latest
-    needs: get-xml-values
+    needs: [get-xml-java-values, get-xml-dotnet-values]
     steps:
       - name: show
         env:
-          projVersion: ${{needs.get-xml-values.outputs.projVersion}}
-          libGroup: ${{needs.get-xml-values.outputs.libGroup}}
-          libArtifact: ${{needs.get-xml-values.outputs.libArtifact}}
-          libVersion: ${{needs.get-xml-values.outputs.libVersion}}
+          projVersion: ${{needs.get-xml-java-values.outputs.projVersion}}
+          libGroup: ${{needs.get-xml-java-values.outputs.libGroup}}
+          libArtifact: ${{needs.get-xml-java-values.outputs.libArtifact}}
+          libVersionJ: ${{needs.get-xml-java-values.outputs.libVersion}}
+          libVersionD: ${{needs.get-xml-dotnet-values.outputs.libVersion}}
         run: |
           echo "projVersion: $projVersion"
           echo "libGroup: $libGroup"
           echo "libArtifact: $libArtifact"
-          echo "libVersion: $libVersion"
+          echo "libVersionJ: $libVersionJ"
+          echo "libVersionD: $libVersionD"

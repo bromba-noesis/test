@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Content Update="config\application\appsettings.local.application.json">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update="config\secrets\appsettings.local.secrets.json">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+      <Content Update="config\application\appsettings.dev.application.json">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="NB.Omc.Autenticacao" Version="1.5.0-SNAPSHOT.130" />
+      <PackageReference Include="NB.Omc.MobileAppSeguranca" Version="1.5.0-SNAPSHOT.130" />
+      <PackageReference Include="NB.Omc.xIT" Version="1.5.0-SNAPSHOT.130" />
+      <PackageReference Include="NB.Omc.xIT.CD.Spa" Version="1.5.0-SNAPSHOT.130" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\NB.Omc.xIT.Security\NB.Omc.xIT.Security.csproj" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
+
+</Project>
